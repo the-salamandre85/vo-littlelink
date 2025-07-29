@@ -39,6 +39,8 @@
     <!-- Learn more at https://github.com/sethcottle/littlelink-extended.
          Remove comments if you've added LittleLink Extended dependencies -->
 
+    
+
   </head>
 
 <body>
@@ -68,7 +70,15 @@
             <div class="button-stack" role="navigation">
  
               <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/generic-calendar.svg" alt="Calendar Icon">Book Saul for a session</a>
-              <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/reel-audio-svgrepo-com.svg" alt="Tape Reel Icon">Play a demo</a>
+              <a class="button button-default" href="#" target="" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/reel-audio-svgrepo-com.svg" alt="Tape Reel Icon">Play a demo</a>
+              <div id="audio player" class="">
+                  <!-- <button class="audio-ctrl play">listen to audio</button>  
+                  <button class="audio-ctrl pause">pause</button> -->
+                <audio controls id="player">
+                  <source src="https://www.dropbox.com/scl/fi/1f4tdhal0o5zbv2wnr0go/Saul-Sambono-Narration-VO-Demo-Slated.wav?rlkey=p8irsd8awe5vv7xxx471bmtkr&st=6ni6iwqn&raw=1" type="audio/mpeg">
+                  Your browser does not support HTML5 audio.
+                </audio>
+              </div>
               <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/generic-email-alt.svg" alt="Tape Reel Icon">Contact</a>
 
       </div>
@@ -80,6 +90,40 @@
 
     </div>
   </div>
+
+  <!-- Javscript for player -->
+  <script>
+    var 
+    $player = $(".audio-ctrl"),
+    $transcript = $(".audio-transcript");
+
+    $(".audio-ctrl").each(function(){
+
+      $(this).attr("aria-pressed","false");
+
+      $(this).click(function(e){
+        e.preventDefault();
+
+        $player.attr("aria-pressed","false");
+
+        if($(this).hasClass("play")){
+          $(this).attr("aria-pressed","true");
+          // 2 sec delay to allow screen reader
+          // to read button state
+          setTimeout(function(){
+            $("#player")[0].play();
+          },2000);
+        }
+        if($(this).hasClass("pause")){
+          $("#player")[0].pause();
+          $(this).attr("aria-pressed","true");
+        }
+        if($(this).hasClass("read")){
+          $transcript.removeClass("visually-hidden").focus();
+        }
+      });
+    });
+  </script>
 
 </body>
 
