@@ -39,7 +39,16 @@
     <!-- Learn more at https://github.com/sethcottle/littlelink-extended.
          Remove comments if you've added LittleLink Extended dependencies -->
 
-    
+    <!-- Collapsible animation-->
+    <style>
+      .content {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 50px;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+      }
+    </style>
 
   </head>
 
@@ -56,7 +65,7 @@
 
               Be sure to replace the src with your own image path and update the alt text
             -->
-            <img class="avatar avatar--rounded" src="images/avatar.png" srcset="images/avatar@2x.png 2x" alt="LittleLink">
+            <img class="avatar avatar--rounded" src="images/mic_avatar.webp" alt="LittleLink">
 
             <!-- Replace with your name or brand -->
             <h1>
@@ -69,23 +78,29 @@
             <!-- All your buttons go here -->
             <div class="button-stack" role="navigation">
  
-              <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/generic-calendar.svg" alt="Calendar Icon">Book Saul for a session</a>
-              <a class="button button-default" href="#" target="" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/reel-audio-svgrepo-com.svg" alt="Tape Reel Icon">Play a demo</a>
-              <div id="audio player" class="">
+              <!-- <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/generic-calendar.svg" alt="Calendar Icon">Book Saul for a session</a> -->
+              <button class="button button-default collapsible" role="button">
+                <img class="icon" aria-hidden="true" src="images/reel-audio-svgrepo-com.svg" alt="Tape Reel Icon">
+                Play a demo
+              </button>
+              <!-- <div id="audio player"> -->
                   <!-- <button class="audio-ctrl play">listen to audio</button>  
                   <button class="audio-ctrl pause">pause</button> -->
-                <audio controls id="player">
-                  <source src="https://www.dropbox.com/scl/fi/1f4tdhal0o5zbv2wnr0go/Saul-Sambono-Narration-VO-Demo-Slated.wav?rlkey=p8irsd8awe5vv7xxx471bmtkr&st=6ni6iwqn&raw=1" type="audio/mpeg">
-                  Your browser does not support HTML5 audio.
-                </audio>
-              </div>
-              <a class="button button-default" href="#" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/generic-email-alt.svg" alt="Tape Reel Icon">Contact</a>
+                  
+                <div class="content">
+                  <audio title="2025 - Narrative Voiceover Demo - Podcast Intro" controls id="player">
+                    <source src="https://www.dropbox.com/scl/fi/1f4tdhal0o5zbv2wnr0go/Saul-Sambono-Narration-VO-Demo-Slated.wav?rlkey=p8irsd8awe5vv7xxx471bmtkr&st=6ni6iwqn&raw=1" type="audio/mpeg">
+                    Your browser does not support HTML5 audio.
+                  </audio>
+                </div>
+              <!-- </div> -->
+              <a class="button button-default" href="mailto:contact@saulsambono.info?subject=Voiceover%20Enquiry" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/generic-email-alt.svg" alt="Tape Reel Icon">Contact</a>
 
       </div>
 
       <!-- Feel free to add your own footer information, including updating `privacy.html` to reflect how your LittleLink fork is set up -->
       <footer>
-        <a href="privacy.html">Privacy Policy</a> | Build your own by forking <a href="https://littlelink.io" target="_blank" rel="noopener">LittleLink</a>
+        <a href="privacy.html">Privacy Policy</a> | Built using <a href="https://littlelink.io" target="_blank" rel="noopener">LittleLink</a>
       </footer>
 
     </div>
@@ -123,6 +138,29 @@
         }
       });
     });
+
+  </script>
+
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+        content.style.display = "none";
+        } else {
+        content.style.display = "block";
+        }
+        if (content.style.maxHeight){
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } 
+      });
+    }
   </script>
 
 </body>
