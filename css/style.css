@@ -65,8 +65,8 @@
   body {
 	margin:0;
 	padding:0;
-	background-color:#ffffff;
-	color:#1a1a1a;
+	background-color:#f8b9fb;
+	color:#590086;
 	font-family:"Open Sans",system-ui;
 	font-size:1.125rem;     				/* 18px */
     font-weight:400;
@@ -153,6 +153,7 @@ body {
 footer {
 	margin:var(--spacing-xxl) 0;            /* 4rem (64px) top and bottom */
     font-size:var(--scale-0);
+	color: #402c9f;
 }
 
 /* Responsive adjustments */
@@ -177,11 +178,11 @@ footer {
 /* Links
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   a {
-	color:#2457F5;
+	color:inherit;
 	text-decoration:underline;
 }
 a:hover {
-	color:#083BDA;
+	color:#d7eaff;
 }
 
 /* Buttons
@@ -426,5 +427,5 @@ ul li {
   padding: 0 18px;
   display: none;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: inherit;
 } 
