@@ -257,7 +257,10 @@
       });
     }
   </script>
-  <script>
+
+  <script src="https://cdn.jsdelivr.net/npm/openplayerjs@latest/dist/openplayer.min.js"></script>
+
+  <script id="rendered-js">
     function loadMedia(e) {
       const id = e.target.closest('.players').querySelector('.op-player').id;
       const player = OpenPlayerJS.instances[id];
