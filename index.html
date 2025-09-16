@@ -126,24 +126,18 @@
               
               <!-- Demo Player -->    
                 <div class="content">
-                  <!--<audio id="audio" title="Saul Sambono - Voiceover Demos" controls preload="none">
+                  <h3>Podcast Intro</h3>
+                  <audio id="audio" title="Saul Sambono - Voiceover Demo 1" controls preload="none">
                     <source src="https://www.dropbox.com/scl/fi/1f4tdhal0o5zbv2wnr0go/Saul-Sambono-Narration-VO-Demo-Slated.wav?rlkey=p8irsd8awe5vv7xxx471bmtkr&st=6ni6iwqn&raw=1" type="audio/mpeg" data-track-number="1" />
+                    Your browser does not support HTML5 audio.
+                  </audio>
+
+                  <h3>Narration in Character - Tomb of the infinite Chicken</h3>
+                  <audio id="audio" title="Saul Sambono - Voiceover Demo 2" controls preload="none">
                     <source src="https://copyparty.saulsambono.info/Projects/Web/Media/Saul/Demos/MusicalChicken.mp3" type="audio/mpeg" data-track-number="2" />
                     Your browser does not support HTML5 audio.
-                  </audio> -->
+                  </audio>
 
-                  <div class="players audio-player">
-                    <div id="stream-info" class="hidden"></div>
-                    <audio class="op-player__media" id="audio" controls>
-                      <source src="https://www.dropbox.com/scl/fi/1f4tdhal0o5zbv2wnr0go/Saul-Sambono-Narration-VO-Demo-Slated.wav?rlkey=p8irsd8awe5vv7xxx471bmtkr&st=6ni6iwqn&raw=1" type="audio/mpeg"/>
-                    </audio>
-                    <div>
-                    <select name="sources">
-                      <option value="https://www.dropbox.com/scl/fi/1f4tdhal0o5zbv2wnr0go/Saul-Sambono-Narration-VO-Demo-Slated.wav?rlkey=p8irsd8awe5vv7xxx471bmtkr&st=6ni6iwqn&raw=1" selected>Podcast Intro - They Produce It with Computers</option>
-                      <option value="https://copyparty.saulsambono.info/Projects/Web/Media/Saul/Demos/MusicalChicken.mp3">Narration in Character - Tomb of the Infinite Chicken</option>
-                    </select>
-                    </div>
-                  </div>
             
                 </div>
 
@@ -258,83 +252,7 @@
     }
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/openplayerjs@latest/dist/openplayer.min.js"></script>
-
-  <script id="rendered-js">
-    function loadMedia(e) {
-      const id = e.target.closest('.players').querySelector('.op-player').id;
-      const player = OpenPlayerJS.instances[id];
-      player.src = this.value.replace('&amp;', '&');
-      player.load();
-      
-      setTimeout(() => {
-      player.play()
-      }, 250);
-    }
-
-    function extractMeta(data, audio) {
-      let startLoc;
-      let endLoc;
-
-      // name
-      startLoc = data.indexOf("TRSN") + 11;
-      endLoc = data.indexOf("TRSO");
-      const name = data.substring(startLoc, endLoc);
-
-      // desc
-      startLoc = data.indexOf("TRSO") + 11;
-      endLoc = data.indexOf("TIT2");
-      const desc = data.substring(startLoc, endLoc);
-
-      // artist
-      startLoc = data.indexOf("TPE1") + 11;
-      endLoc = data.indexOf("TPE2");
-      const artist = data.substring(startLoc, endLoc);
-
-      // title
-      startLoc = data.indexOf("TIT2") + 11;
-      endLoc = data.indexOf("TPE1");
-      const title = data.substring(startLoc, endLoc);
-
-      // image
-      const image = data.match('(http:\/\/|https:\/\/).*\.(jpg|png|svg)')[0];
-      const infoArea = document.getElementById('stream-info');
-
-      infoArea.innerHTML = `
-      <img src="${image}" alt="${title}, by ${artist}" width="300" />
-      <p>Name: ${name}</p>
-      <p>Desc: ${desc}</p>
-      <p>Artist: ${artist}</p>
-      <p>Title: ${title}</p>
-      `;
-      infoArea.classList.remove('hidden');
-      audio.poster = image;
-    }
-
-    document.querySelectorAll('select[name=sources]').forEach(source => {
-      source.addEventListener('change', loadMedia);
-    });
-
-    document.querySelectorAll('.op-player__media').forEach((player, i) => {
-      const p = new OpenPlayerJS(player.id, {
-      hls: {
-        startLevel: -1
-      }
-      });
-      p.init();
-      
-      if (i === 1) {
-      p.getElement().addEventListener('hlsFragParsingMetadata', event => {
-        const parsedTag = [];
-        event.detail.samples[0].data.forEach(element => {
-          parsedTag.push(String.fromCharCode(element));
-        });
-        extractMeta(parsedTag.toString().replace(/,/g, ''), p.getElement());
-      });
-      }
-    });
-
-  </script>
+  
 </body>
 
 </html>
